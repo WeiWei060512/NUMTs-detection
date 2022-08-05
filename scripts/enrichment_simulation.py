@@ -1,4 +1,8 @@
 #!/usr/bin/env python
+################################################################################
+## This script does the enrichment permutation test
+## Example of run: python enrichment_simulation.py inputFile 100 10 200 outputFile
+################################################################################
 
 import fileinput
 import sys, os
@@ -14,7 +18,7 @@ input1,numtsNo,numtsTargetNo,numtsLength,output = sys.argv[1:]
 
 numtsNo = int(numtsNo) #total number of NUMTs
 numtsTargetNo = int(numtsTargetNo) #number of NUMTs in the target/testing region 
-numtsLength = int(numtsLength)# length of flaking region of NUMTs  
+numtsLength = int(numtsLength) #length of flaking region of NUMTs  
 
 simuRuns = 1001 #number of simulation
 numtsTargetPerc = numtsTargetNo/numtsNo

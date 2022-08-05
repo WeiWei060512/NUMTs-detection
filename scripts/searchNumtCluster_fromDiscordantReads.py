@@ -1,5 +1,9 @@
 #!/usr/bin/env python
 
+################################################################################
+## This script takes outputs from NUMT_detection.sh to generates NUMT clusters
+################################################################################
+
 import fileinput
 import sys, os
 import pandas as pd

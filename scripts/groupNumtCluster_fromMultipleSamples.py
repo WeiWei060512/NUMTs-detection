@@ -1,13 +1,16 @@
 #!/usr/bin/env python
 
+################################################################################
+## This script takes the cluster sum files generated from searchNumtCluster_fromDiscordantReads.py
+## to look for shared NUMT clusters across different individuals
+################################################################################
+
 import fileinput
 import sys, os
 import numpy as np
 import pandas as pd
 import glob
 import scipy.stats as stats
-
-#################### summary cluster from merged individual cluster sum file  ###########################
 
 def cluster(data, maxgap):
 	data.sort()
@@ -19,9 +22,8 @@ def cluster(data, maxgap):
 			groups.append([x])
 	return groups
 
-## individual cluster sum file was generated from output of extract discordant reads step 
+
 input1 = sys.argv[1]
-print (input1)
 
 df0 = pd.read_csv(input1,sep="\t", engine='python')
 df = df0.drop_duplicates(["sampleID","chr","start"])

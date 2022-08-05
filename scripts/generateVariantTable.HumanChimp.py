@@ -1,5 +1,4 @@
-#. /resources/conda/miniconda3/etc/profile.d/conda.sh
-# conda activate envBiopython
+#!/usr/bin/env python
 
 import Bio
 from Bio import AlignIO
@@ -11,9 +10,11 @@ import pandas as pd
 import sys
 import re
 
-# multiple alinment #
+# input aln - multiple alignment file from NUMT sequences
+# input numts - target numts contains numtID, numt_start and numt_end
 aln,numts = sys.argv[1:]
 
+# make sampleID, numtID and contigID
 index1 = re.sub(r".*LP", "LP", aln)
 index2 = re.sub(r"\..*", "", index1)
 numtID = index2.split('_')[2] + '_' + index2.split('_')[3]
@@ -23,7 +24,7 @@ contigID = re.sub(r".*\.", "", index3)
 
 mynumts = pd.read_csv(numts, names=['numtID','numt_start','numt_end','comment'], sep="\t")
 mysequence =  AlignIO.read(aln,'fasta')
-#N = len(mysequence) - 2
+
 myseq = []
 for i in mysequence:
 	myseq.append(i.seq)
@@ -79,24 +80,3 @@ mydf3.to_csv(aln + '.numt.tsv', index=0, sep='\t')
 mydf4.to_csv(aln + '.numtDhumanChimp.tsv', index=0, sep='\t')
 mysum.to_csv(aln + '.numtDhumanChimp.sum.tsv', index=True, sep='\t')
 
-#  get summmary table
-#mysum = mydf3.groupby(['comment']).comment.describe()
-#humanN = len(mydf3[ mydf3.apply(lambda x: x[0] == x.allele, axis=1) ])
-#chimpN = len(mydf3[ mydf3.apply(lambda x: x[1] == x.allele, axis=1) ])
-#mysum['total'] = len(mydf3)
-#mysum['%human'] = humanN / (chimpN + humanN)
-#mysum['age'] = 6 * (chimpN / (chimpN + humanN))
-#mysum['numts'] = aln
-
-# output results
-#print (aln, '\n', mysum)
-
-"""
-#len(mydf3[ mydf3.apply(lambda x: x[0] in x.allele, axis=1) ])
-#len(mydf3[ mydf3.apply(lambda x: x[1] in x.allele, axis=1) ])
-
-from Bio.Align.Applications import ClustalwCommandline
-cline = ClustalwCommandline("clustalw2", infile="opuntia.fasta")
-print(cline)
-clustalw2 -infile=opuntia.fasta
-"""

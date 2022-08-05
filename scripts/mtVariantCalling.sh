@@ -1,12 +1,20 @@
 #! /bin/bash
 
+################################################################################
+## This script does mtDNA variants calling
+## MToolBox, Varscan2 and haploGrep2 need to be installed
+## More details to run MToolBox can be found at https://github.com/mitoNGS/MToolBox
+## More details to run Varscan2 can be found at http://dkoboldt.github.io/varscan/
+## haploGrep2 can be downloaded at https://github.com/seppinho/haplogrep-cmd
+################################################################################
+
 ## MToolBox calling ##
 CONF="./mtVariantCalling_MToolBox.conf"
 
 MToolBox.sh -i $CONF > log.txt
 
 ### Varscan2 uses realigned mtDNA bam file from MToolBox to call the variants 
-BAM_FILE=$1 #Bam list file
+BAM_FILE=$1 # realigned mtDNA bam file generated from MToolBox
 SAMPLE_ID=${BAM_FILE##*/}
 SAMPLE_ID=${SAMPLE_ID%.bam}
 VARSCAN_OUT_DIR="varscan2_outputDir"

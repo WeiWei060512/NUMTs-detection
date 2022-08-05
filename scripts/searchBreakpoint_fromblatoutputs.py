@@ -1,4 +1,8 @@
 #!/usr/bin/env python
+################################################################################
+## This script takes outputs from searchNumtCluster_fromDiscordantReads.py and NUMT_detection.sh 
+## to look for NUMT breakpoints
+################################################################################
 
 import fileinput
 import sys, os
@@ -9,7 +13,7 @@ import scipy.stats as stats
 
 
 def f_nu(row):
-	mismatchLEN = 3  ### maybe too harsh 
+	mismatchLEN = 3 
 	readLEN = 150
 	if ((row['strand'] == "+") & (row['Qend'] >= (readLEN-mismatchLEN))):
 		pointFrom = "nu_Tstart_Bright"
@@ -42,17 +46,15 @@ def f_mt(row):
 
 INPUT_PSL,SAMPLEID,CHR,START,END,OUTPUT=sys.argv[1:]
 
-mismatchLEN = 3  ### maybe too harsh 
-readLEN = 150
+mismatchLEN = 3 # number of mismatched bases
+readLEN = 150 # wgs read length
 START = int(START)
 END = int(END)
-hg37CHR = CHR.replace("chr","") ## not necessary when align to hg38 only
+hg37CHR = CHR.replace("chr","") ## delete when align to hg38 only
 
 df_input = pd.read_csv(INPUT_PSL, skiprows=5, sep="\t", names=["match","misMatch","repMatch","Ns","QgapCount","QgapBases","TgapCount","TgapBases","strand","Qname","Qsize","Qstart","Qend","Tname","Tsize","Tstart","Tend","blockCount","blockSizes","qStarts","tStarts"])
 df_input['matchLEN'] = df_input['Tend'] - df_input['Tstart']
 
-### keep length of matched base < 140bp and mismatched base <= 3bp ###
-### keep either start or end of read match ###
 df1 = df_input[(df_input['matchLEN'] < (readLEN - 10)) & (df_input['misMatch'] <= mismatchLEN)]
 df2 = df1[(df1['Tend'] >= (readLEN - mismatchLEN)) | (df1['Tend'] <= mismatchLEN )]
 

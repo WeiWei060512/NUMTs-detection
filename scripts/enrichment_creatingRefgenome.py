@@ -1,5 +1,9 @@
 #!/usr/bin/env python
 
+################################################################################
+## This script generates the nuclear reference genome file used in enrichment permutation test
+################################################################################
+
 import fileinput
 import sys, os
 import pandas as pd
@@ -12,7 +16,7 @@ import numpy as np
 input1 = sys.argv[1] # bedfile of each chromosome from whole genome
 
 df_raw = pd.read_csv(input1, names=['chr','start','end'],sep="\t")
-df = df_raw[df_raw.chr.isin(['chr1','chr2','chr3','chr4','chr5','chr6','chr7','chr8','chr9','chr10','chr11','chr12','chr13','chr14','chr15','chr16','chr17','chr18','chr19','chr20','chr21','chr22','chrX','chrY','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','X','Y'])]
+df = df_raw[df_raw.chr.isin(['chr1','chr2','chr3','chr4','chr5','chr6','chr7','chr8','chr9','chr10','chr11','chr12','chr13','chr14','chr15','chr16','chr17','chr18','chr19','chr20','chr21','chr22','chrX','chrY'])]
 
 refStart_noChr = []
 refEnd_noChr = []

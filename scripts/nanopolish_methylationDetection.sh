@@ -1,3 +1,11 @@
+#! /bin/bash
+
+################################################################################
+## This script detects methylation sites from long-read sequencing
+## nanopolish need to be installed to run the pipeline
+## nanopolish can be downloaded at https://github.com/jts/nanopolish
+## Example of run: nanopolish_methylationDetection.sh inputDir outputDir ref numtRegion
+################################################################################
 
 
 INPUT_DIR=$1 #inputs directory 

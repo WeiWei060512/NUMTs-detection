@@ -1,6 +1,16 @@
 #! /bin/bash
 
-INPUT_LIST="fastaFiles.list" # list of fasta files 
+################################################################################
+## This script detects NUMT variants from discordance and split reads
+## CAP3, blat and clustalo need to be installed
+## CAP3 can be downloaded at https://faculty.sites.iastate.edu/xqhuang/cap3-and-pcap-sequence-and-genome-assembly-programs
+## blat can be downloaded at http://hgdownload.soe.ucsc.edu/admin/exe/
+## clustalo can be downloaded at http://www.clustal.org/omega/#Download
+
+################################################################################
+
+
+INPUT_LIST="fastaFiles.list" # list of fasta files contains NUMT sequences
 
 OUTPUT_DIR='outputs'
 OUTPUT_DIR_cap3="${OUTPUT_DIR}/assembly"
@@ -15,10 +25,11 @@ for line in $filelines ; do
     contigINPUT="$(echo $line | cut -d, -f1)"
     sampleIndex="${contigINPUT##*/}"
 
-    refHuman="./reference/chrM.fa"
-    refChimp="./reference/chimpMT.fa"
-    refHumanChimp="./reference/Homo_sapiens.GRCh38.Pan_troglodytes.Pan_tro_3.0.dna.chromosome.MT.fa"
-
+    refHuman="chrM.fa" ## huamn mtDNA reference genome sequence
+    refChimp="chimpMT.fa" ## chimp mtDNA reference genome sequence
+    ## combined human and chimp mtDNA reference genome sequence
+    refHumanChimp="Homo_sapiens.GRCh38.Pan_troglodytes.Pan_tro_3.0.dna.chromosome.MT.fa" 
+     
     ### assembly ###
     cap3_out="${contigINPUT}.cap"
     ./CAP3/cap3 ${fasta} >${cap3_out}

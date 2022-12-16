@@ -1,7 +1,7 @@
 # NUMTs-detection
 This repository contains scripts for data processing and analysis used in the manuscript:
 
-Wei W, Schon K, Elgar G, Orioli A, Tanguy M, Giess A, Tischkowitz M, Caulfield M, Chinnery PF. Nuclear-embedded mitochondrial DNA sequences in 66,083 human genomes. Nature 2022:in press.
+Wei W, Schon K, Elgar G, Orioli A, Tanguy M, Giess A, Tischkowitz M, Caulfield M, Chinnery PF. Nuclear-embedded mitochondrial DNA sequences in 66,083 human genomes. Nature 611, 105–114 (2022)
 
 1. NUMTs and breakpoints detection 
 

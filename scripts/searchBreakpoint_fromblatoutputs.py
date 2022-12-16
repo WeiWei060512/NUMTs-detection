@@ -55,7 +55,7 @@ hg37CHR = CHR.replace("chr","") ## delete when align to hg38 only
 df_input = pd.read_csv(INPUT_PSL, skiprows=5, sep="\t", names=["match","misMatch","repMatch","Ns","QgapCount","QgapBases","TgapCount","TgapBases","strand","Qname","Qsize","Qstart","Qend","Tname","Tsize","Tstart","Tend","blockCount","blockSizes","qStarts","tStarts"])
 df_input['matchLEN'] = df_input['Tend'] - df_input['Tstart']
 
-df1 = df_input[(df_input['matchLEN'] < (readLEN - 10)) & (df_input['misMatch'] <= mismatchLEN)]
+df1 = df_input[(df_input['matchLEN'] < (readLEN - 10)) & (df_input['misMatch'] <= mismatchLEN)] 
 df2 = df1[(df1['Tend'] >= (readLEN - mismatchLEN)) | (df1['Tend'] <= mismatchLEN )]
 
 df_mt = df2[df2['Tname'].isin(['chrM','MT'])]
@@ -98,11 +98,11 @@ df_mtTstartLeft = df_mtTstart[df_mtTstart['Qname'].isin(list(df_nuLeft['Qname'])
 df_mtTstartRight = df_mtTstart[df_mtTstart['Qname'].isin(list(df_nuRight['Qname']))]
 
 df_mtLeftTstartG = df_mtTstartLeft.groupby(['pointGroup','chr','Tstart','strand']).size().reset_index(name="readsCount")
-df_mtLeftTstartG['Group'] = "mtLeft"
+df_mtLeftTstartG['Group'] = "mtLeft" ## "mtLeft": left breakpoint of mtDNA
 df_mtLeftTendG = df_mtTendLeft.groupby(['pointGroup','chr','Tend','strand']).size().reset_index(name="readsCount")
 df_mtLeftTendG['Group'] = "mtLeft"
 df_mtRightTstartG = df_mtTstartRight.groupby(['pointGroup','chr','Tstart','strand']).size().reset_index(name="readsCount")
-df_mtRightTstartG['Group'] = "mtRight"
+df_mtRightTstartG['Group'] = "mtRight" ## "mtRight": right breakpoint of mtDNA
 df_mtRightTendG = df_mtTendRight.groupby(['pointGroup','chr','Tend','strand']).size().reset_index(name="readsCount")
 df_mtRightTendG['Group'] = "mtRight"
 df_mtConfG = pd.concat([df_mtLeftTstartG,df_mtLeftTendG,df_mtRightTstartG,df_mtRightTendG])

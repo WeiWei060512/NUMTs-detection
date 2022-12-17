@@ -55,8 +55,8 @@ hg37CHR = CHR.replace("chr","") ## delete when align to hg38 only
 df_input = pd.read_csv(INPUT_PSL, skiprows=5, sep="\t", names=["match","misMatch","repMatch","Ns","QgapCount","QgapBases","TgapCount","TgapBases","strand","Qname","Qsize","Qstart","Qend","Tname","Tsize","Tstart","Tend","blockCount","blockSizes","qStarts","tStarts"])
 df_input['matchLEN'] = df_input['Tend'] - df_input['Tstart']
 
-df1 = df_input[(df_input['matchLEN'] < (readLEN - 10)) & (df_input['misMatch'] <= mismatchLEN)] 
-df2 = df1[(df1['Tend'] >= (readLEN - mismatchLEN)) | (df1['Tend'] <= mismatchLEN )]
+df2 = df_input[(df_input['matchLEN'] < (readLEN - 10)) & (df_input['misMatch'] <= mismatchLEN)] # ignore reads with total length of mapped bases >140bp and mismatched bases >= 3bp (140bp and 3bp are arbitrary numbers)
+#df2 = df1[(df1['Tend'] >= (readLEN - mismatchLEN)) | (df1['Tend'] <= mismatchLEN )] 
 
 df_mt = df2[df2['Tname'].isin(['chrM','MT'])]
 df_nu = df2[ (df2['Tname'].isin([CHR, hg37CHR])) & (df2['Tstart'] > START) & (df2['Tend'] < END)]

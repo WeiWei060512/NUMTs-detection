@@ -98,11 +98,11 @@ df_mtTstartLeft = df_mtTstart[df_mtTstart['Qname'].isin(list(df_nuLeft['Qname'])
 df_mtTstartRight = df_mtTstart[df_mtTstart['Qname'].isin(list(df_nuRight['Qname']))]
 
 df_mtLeftTstartG = df_mtTstartLeft.groupby(['pointGroup','chr','Tstart','strand']).size().reset_index(name="readsCount")
-df_mtLeftTstartG['Group'] = "mtLeft" ## "mtLeft": left breakpoint of mtDNA
+df_mtLeftTstartG['Group'] = "mtLeft" ## "mtLeft": one end of mtDNA insertion
 df_mtLeftTendG = df_mtTendLeft.groupby(['pointGroup','chr','Tend','strand']).size().reset_index(name="readsCount")
 df_mtLeftTendG['Group'] = "mtLeft"
 df_mtRightTstartG = df_mtTstartRight.groupby(['pointGroup','chr','Tstart','strand']).size().reset_index(name="readsCount")
-df_mtRightTstartG['Group'] = "mtRight" ## "mtRight": right breakpoint of mtDNA
+df_mtRightTstartG['Group'] = "mtRight" ## "mtRight": another end of mtDNA insertion
 df_mtRightTendG = df_mtTendRight.groupby(['pointGroup','chr','Tend','strand']).size().reset_index(name="readsCount")
 df_mtRightTendG['Group'] = "mtRight"
 df_mtConfG = pd.concat([df_mtLeftTstartG,df_mtLeftTendG,df_mtRightTstartG,df_mtRightTendG])

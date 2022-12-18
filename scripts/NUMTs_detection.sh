@@ -26,7 +26,7 @@ SAMPLE_ID2=${SAMPLE_ID1%.bam}
 OUTPUT="${OUTPUT_DIR}/${SAMPLE_ID2}"
 
 INPUT_DISC="${OUTPUT}.mt.disc.sam"
-INPUT_SPLIT="${OUTPUT_wgs}.mt.split.sam"
+INPUT_SPLIT="${OUTPUT}.mt.split.sam"
 
 samtools view -@ 16 -m 10G -h -F 2 $INPUT_BAM | grep -e @ -e MT -e chrM | samtools sort -@ 16 -m 10G -n  | samtools view -h | samblaster --ignoreUnmated -e -d $INPUT_DISC -s $INPUT_SPLIT -o /dev/null
 

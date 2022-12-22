@@ -9,8 +9,8 @@
 ################################################################################
 
 ## load modules on HPC
-module load samblaster/0.1.24
-module load samtools 
+module load samblaster/0.1.25
+module load samtools/1.9
 module load Sambamba/0.6.6
 
 

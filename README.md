@@ -3,7 +3,7 @@ This repository contains scripts for data processing and analysis used in the pu
 
 Wei W, Schon K, Elgar G, Orioli A, Tanguy M, Giess A, Tischkowitz M, Caulfield M, Chinnery PF. Nuclear-embedded mitochondrial DNA sequences in 66,083 human genomes. Nature 611, 105–114 (2022). https://doi.org/10.1038/s41586-022-05288-7 
 
-Please cite this paper when using our code in your publications.
+Note: It's not a software to do general analysis and won't be maintained. If you do use the code in your publications, please cite our paper.
 
 1. NUMTs and breakpoints detection 
 

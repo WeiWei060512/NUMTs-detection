@@ -69,6 +69,9 @@ df_nu['Group'] =  df_nu['pointGroup'].str.replace(r'_T.*B','')
 df_mt['chr'] = 'chrM'
 
 ## list all nuclear breakpoints ##
+## For most of the NUMTs, there is a single breakpoint position within nuclear genome ##
+## However if there is a small indel or other structure variation occur at the same location, there will be two breakpoints within nuclear genome ##
+
 df_nuLeft = df_nu[df_nu['pointGroup'] == 'nu_Tend_Bleft']
 df_nuLeftG = df_nuLeft.groupby(['pointGroup','Group','chr','Tend','strand']).size().reset_index(name="readsCount")
 df_nuRight = df_nu[df_nu['pointGroup'] == 'nu_Tstart_Bright']
